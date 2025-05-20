@@ -3,7 +3,7 @@ package com.smurzik.rickstatistictesttask.di
 import com.smurzik.rickstatistictesttask.data.StatisticRepositoryImpl
 import com.smurzik.rickstatistictesttask.data.remote.StatisticService
 import com.smurzik.rickstatistictesttask.data.remote.StatisticServiceImpl
-import com.smurzik.rickstatistictesttask.domain.GetStatisticUseCase
+import com.smurzik.rickstatistictesttask.domain.GetMonthlyVisitorsUseCase
 import com.smurzik.rickstatistictesttask.domain.StatisticRepository
 import dagger.Module
 import dagger.Provides
@@ -39,7 +39,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideGetStatisticUseCase(repository: StatisticRepository): GetStatisticUseCase {
-        return GetStatisticUseCase(repository)
+    fun provideGetMonthlyVisitorsUseCase(repository: StatisticRepository): GetMonthlyVisitorsUseCase {
+        return GetMonthlyVisitorsUseCase(repository)
     }
 }

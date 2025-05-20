@@ -1,7 +1,6 @@
 package com.smurzik.rickstatistictesttask.ui.theme
 
 import androidx.compose.material3.Typography
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -10,7 +9,9 @@ import androidx.compose.ui.unit.sp
 import com.smurzik.rickstatistictesttask.R
 
 val Gilroy = FontFamily(
-    Font(R.font.gilroy_bold, FontWeight.Bold)
+    Font(R.font.gilroy_bold, FontWeight.Bold),
+    Font(R.font.gilroy_medium, FontWeight.Medium),
+    Font(R.font.gilroy_semibold, FontWeight.SemiBold)
 )
 
 // Set of Material typography styles to start with
@@ -28,8 +29,27 @@ val Typography = Typography(
         fontSize = 32.sp,
         lineHeight = 40.sp,
         letterSpacing = (-0.14).sp,
-        color = Color.Black
+    ),
+    titleMedium = TextStyle(
+        fontFamily = Gilroy,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+        letterSpacing = (-0.11).sp,
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = Gilroy,
+        fontWeight = FontWeight.Medium,
+        fontSize = 15.sp,
+        letterSpacing = 0.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = Gilroy,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 15.sp,
+        lineHeight = 16.sp,
+        letterSpacing = (-0.09).sp
     )
+
     /* Other default text styles to override
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,

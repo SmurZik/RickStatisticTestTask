@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
@@ -22,10 +23,14 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
+    primary = Color.White,
     secondary = PurpleGrey40,
     tertiary = Pink40,
-    background = Color(0xFFF6F6F6)
+    background = BackgroundGrey,
+    onBackground = Color.Black,
+    surface = Red,
+    outline = Grey,
+    onSecondary = GreySecondary
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -47,11 +52,16 @@ fun RickStatisticTestTaskTheme(
 ) {
 
     val view = LocalView.current
-    val window = (view.context as Activity).window
 
-    SideEffect {
-        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
+    val inPreview = LocalInspectionMode.current
+
+    if (!inPreview) {
+        val window = (view.context as Activity).window
+        SideEffect {
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
+        }
     }
+
 
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
