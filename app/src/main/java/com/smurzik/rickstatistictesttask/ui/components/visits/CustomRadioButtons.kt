@@ -14,14 +14,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.smurzik.rickstatistictesttask.domain.models.SortType
 import com.smurzik.rickstatistictesttask.ui.theme.RickStatisticTestTaskTheme
 
 @Composable
 fun CustomRadioButtons(
     modifier: Modifier = Modifier,
-    options: List<String>,
-    selectedOption: String,
-    onOptionSelected: (String) -> Unit
+    options: List<SortType>,
+    selectedOption: SortType,
+    onOptionSelected: (SortType) -> Unit
 ) {
     Row(
         modifier = modifier,
@@ -45,7 +46,7 @@ fun CustomRadioButtons(
                     MaterialTheme.colorScheme.outline
                 )
             ) {
-                Text(text = option, style = MaterialTheme.typography.labelMedium)
+                Text(text = option.label, style = MaterialTheme.typography.labelMedium)
             }
         }
     }
@@ -59,8 +60,8 @@ fun CustomRadioButtonsPreview() {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.background),
-            options = listOf("По дням", "По неделям", "По месяцам"),
-            selectedOption = "По дням",
+            options = SortType.entries,
+            selectedOption = SortType.DAYS,
             onOptionSelected = {}
         )
     }

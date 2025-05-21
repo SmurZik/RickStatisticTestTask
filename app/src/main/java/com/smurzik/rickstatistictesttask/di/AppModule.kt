@@ -4,6 +4,7 @@ import com.smurzik.rickstatistictesttask.data.StatisticRepositoryImpl
 import com.smurzik.rickstatistictesttask.data.remote.StatisticService
 import com.smurzik.rickstatistictesttask.data.remote.StatisticServiceImpl
 import com.smurzik.rickstatistictesttask.domain.GetMonthlyVisitorsUseCase
+import com.smurzik.rickstatistictesttask.domain.GetVisitorsChartUseCase
 import com.smurzik.rickstatistictesttask.domain.StatisticRepository
 import dagger.Module
 import dagger.Provides
@@ -41,5 +42,11 @@ object AppModule {
     @Singleton
     fun provideGetMonthlyVisitorsUseCase(repository: StatisticRepository): GetMonthlyVisitorsUseCase {
         return GetMonthlyVisitorsUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetVisitorsChartUseCase(repository: StatisticRepository): GetVisitorsChartUseCase {
+        return GetVisitorsChartUseCase(repository)
     }
 }
