@@ -4,6 +4,7 @@ import com.smurzik.rickstatistictesttask.data.StatisticRepositoryImpl
 import com.smurzik.rickstatistictesttask.data.remote.StatisticService
 import com.smurzik.rickstatistictesttask.data.remote.StatisticServiceImpl
 import com.smurzik.rickstatistictesttask.domain.GetMonthlyVisitorsUseCase
+import com.smurzik.rickstatistictesttask.domain.GetTopVisitorsUseCase
 import com.smurzik.rickstatistictesttask.domain.GetVisitorsChartUseCase
 import com.smurzik.rickstatistictesttask.domain.StatisticRepository
 import dagger.Module
@@ -14,6 +15,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
 @Module
@@ -26,7 +28,9 @@ object AppModule {
         return StatisticServiceImpl(
             client = HttpClient(Android) {
                 install(ContentNegotiation) {
-                    json()
+                    json(Json {
+                        ignoreUnknownKeys = true
+                    })
                 }
             }
         )
@@ -48,5 +52,11 @@ object AppModule {
     @Singleton
     fun provideGetVisitorsChartUseCase(repository: StatisticRepository): GetVisitorsChartUseCase {
         return GetVisitorsChartUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetTopVisitorsUseCase(repository: StatisticRepository): GetTopVisitorsUseCase {
+        return GetTopVisitorsUseCase(repository)
     }
 }

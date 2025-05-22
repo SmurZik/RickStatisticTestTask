@@ -78,4 +78,7 @@ dependencies {
     // Glide
     implementation (libs.compose)
 
+    //Shimmer
+    implementation(libs.compose.shimmer)
+
 }

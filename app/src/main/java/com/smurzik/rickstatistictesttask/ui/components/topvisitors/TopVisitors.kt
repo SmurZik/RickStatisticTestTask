@@ -16,25 +16,43 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.smurzik.rickstatistictesttask.R
 import com.smurzik.rickstatistictesttask.domain.models.TopVisitorsModel
+import com.smurzik.rickstatistictesttask.presentation.TopVisitorsViewModel
 import com.smurzik.rickstatistictesttask.ui.theme.RickStatisticTestTaskTheme
+import com.valentinilk.shimmer.shimmer
+
+@Composable
+fun TopVisitorsComponent(
+    modifier: Modifier = Modifier,
+    topVisitorsViewModel: TopVisitorsViewModel = viewModel()
+) {
+
+    val topVisitorsState by topVisitorsViewModel.uiState.collectAsState()
+
+    TopVisitors(
+        modifier = modifier,
+        topVisitorsState
+    )
+}
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun TopVisitorsComponent(
+fun TopVisitors(
     modifier: Modifier = Modifier,
     topVisitors: List<TopVisitorsModel>
 ) {
@@ -111,9 +129,9 @@ fun TopVisitorsComponent(
 
 @Composable
 @Preview
-fun TopVisitorsComponentPreview() {
+fun TopVisitorsPreview() {
     RickStatisticTestTaskTheme {
-        TopVisitorsComponent(
+        TopVisitors(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.background)
                 .padding(16.dp),

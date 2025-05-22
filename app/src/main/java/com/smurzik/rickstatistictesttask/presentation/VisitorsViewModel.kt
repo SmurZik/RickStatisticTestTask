@@ -8,6 +8,7 @@ import com.smurzik.rickstatistictesttask.domain.models.SortType
 import com.smurzik.rickstatistictesttask.ui.components.visits.DataPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -23,9 +24,11 @@ class VisitorsViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(VisitorsUiState())
     val uiState: StateFlow<VisitorsUiState> = _uiState
 
+    private var job: Job? = null
+
     init {
         getVisitors()
-        getVisitorsChart()
+        getVisitorsChart(isInit = true)
     }
 
     private fun getVisitors() {
@@ -36,18 +39,21 @@ class VisitorsViewModel @Inject constructor(
         }
     }
 
-    fun getVisitorsChart(sortType: SortType = SortType.DAYS) {
-        _uiState.update {
-            it.copy(loadingChart = true, selectedSortType = sortType)
-        }
-        viewModelScope.launch(Dispatchers.IO) {
-            _uiState.update { state ->
-                state.copy(
-                    chartVisitors = getVisitorsChartUseCase(sortType).map {
-                        DataPoint(it.key, it.value.toFloat())
-                    },
-                    loadingChart = false
-                )
+    fun getVisitorsChart(sortType: SortType = SortType.DAYS, isInit: Boolean = false) {
+        if (_uiState.value.selectedSortType != sortType || isInit) {
+            if (job?.isActive == true) job?.cancel()
+            _uiState.update {
+                it.copy(loadingChart = true, selectedSortType = sortType)
+            }
+            job = viewModelScope.launch(Dispatchers.IO) {
+                _uiState.update { state ->
+                    state.copy(
+                        chartVisitors = getVisitorsChartUseCase(sortType).map {
+                            DataPoint(it.key, it.value.toFloat())
+                        },
+                        loadingChart = false
+                    )
+                }
             }
         }
     }
