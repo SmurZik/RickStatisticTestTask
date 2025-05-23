@@ -48,6 +48,20 @@ val Typography = Typography(
         fontSize = 15.sp,
         lineHeight = 16.sp,
         letterSpacing = (-0.09).sp
+    ),
+    bodySmall = TextStyle(
+        fontFamily = Gilroy,
+        fontWeight = FontWeight.Medium,
+        fontSize = 13.sp,
+        lineHeight = 16.sp,
+        letterSpacing = (-0.04).sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = Gilroy,
+        fontWeight = FontWeight.Medium,
+        fontSize = 10.sp,
+        lineHeight = 11.sp,
+        letterSpacing = (-0.11).sp
     )
 
     /* Other default text styles to override

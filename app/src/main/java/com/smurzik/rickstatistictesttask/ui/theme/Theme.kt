@@ -31,7 +31,9 @@ private val LightColorScheme = lightColorScheme(
     surface = Red,
     outline = Grey,
     onSecondary = GreySecondary,
-    onTertiary = GreyStroke
+    onTertiary = GreyStroke,
+    onSurfaceVariant = GreenDonut,
+    onPrimaryContainer = GreenOnline
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.smurzik.rickstatistictesttask.domain.models.TopVisitorsModel
 import com.smurzik.rickstatistictesttask.ui.components.CustomTopBar
+import com.smurzik.rickstatistictesttask.ui.components.age.AgeComponent
 import com.smurzik.rickstatistictesttask.ui.components.topvisitors.TopVisitors
 import com.smurzik.rickstatistictesttask.ui.components.topvisitors.TopVisitorsComponent
 import com.smurzik.rickstatistictesttask.ui.components.visits.VisitorsComponent
@@ -48,6 +49,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             VisitorsComponent()
                             TopVisitorsComponent()
+                            AgeComponent()
                         }
                     }
                 }

@@ -92,7 +92,10 @@ fun TopVisitors(
                             Box(
                                 modifier = Modifier
                                     .size(8.dp)
-                                    .background(color = Color.Green, shape = CircleShape)
+                                    .background(
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                        shape = CircleShape
+                                    )
                                     .align(Alignment.BottomEnd)
                                     .border(
                                         width = 1.dp,

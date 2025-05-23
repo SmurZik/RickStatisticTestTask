@@ -15,3 +15,6 @@ val Red = Color(0xFFFF2E00)
 val Grey = Color(0xFFE9E9EA)
 val GreySecondary = Color(0xFFA7A7B1)
 val GreyStroke = Color(0xFFEFEFEF)
+
+val GreenDonut = Color(0xFFF99963)
+val GreenOnline = Color(0xFF09D93E)
