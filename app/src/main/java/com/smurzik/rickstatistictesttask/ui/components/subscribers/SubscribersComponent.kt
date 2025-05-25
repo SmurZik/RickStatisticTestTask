@@ -10,27 +10,39 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.smurzik.rickstatistictesttask.R
+import com.smurzik.rickstatistictesttask.presentation.SubscribersViewModel
 import com.smurzik.rickstatistictesttask.ui.theme.RickStatisticTestTaskTheme
 
 @Composable
 fun SubscribersComponent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    subscribersViewModel: SubscribersViewModel = viewModel()
 ) {
-    Subscribers(
 
+    val subscribersState by subscribersViewModel.uiState.collectAsState()
+
+    Subscribers(
+        modifier = modifier,
+        subscribesCount = subscribersState.subscribesCount,
+        unsubscribesCount = subscribersState.unsubscribesCount
     )
 }
 
 @Composable
 fun Subscribers(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    subscribesCount: Int,
+    unsubscribesCount: Int
 ) {
     Column(
         modifier = modifier.padding(bottom = 32.dp)
@@ -63,7 +75,7 @@ fun Subscribers(
                     ) {
                         Text(
                             modifier = Modifier.padding(end = 6.dp),
-                            text = "200",
+                            text = "$subscribesCount",
                             style = MaterialTheme.typography.titleMedium
                         )
                         Image(
@@ -100,7 +112,7 @@ fun Subscribers(
                     ) {
                         Text(
                             modifier = Modifier.padding(end = 6.dp),
-                            text = "10",
+                            text = "$unsubscribesCount",
                             style = MaterialTheme.typography.titleMedium
                         )
                         Image(
@@ -121,8 +133,12 @@ fun Subscribers(
 
 @Composable
 @Preview
-fun SubscribersComponent() {
+fun SubscribersPreview() {
     RickStatisticTestTaskTheme {
-        Subscribers(modifier = Modifier.background(color = MaterialTheme.colorScheme.background))
+        Subscribers(
+            modifier = Modifier.background(color = MaterialTheme.colorScheme.background),
+            subscribesCount = 200,
+            unsubscribesCount = 15
+        )
     }
 }

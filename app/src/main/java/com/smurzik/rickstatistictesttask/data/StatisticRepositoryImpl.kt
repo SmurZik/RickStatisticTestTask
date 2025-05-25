@@ -5,6 +5,7 @@ import com.smurzik.rickstatistictesttask.domain.StatisticRepository
 import com.smurzik.rickstatistictesttask.domain.models.AgeStatisticModel
 import com.smurzik.rickstatistictesttask.domain.models.SortTypeAge
 import com.smurzik.rickstatistictesttask.domain.models.StatisticModel
+import com.smurzik.rickstatistictesttask.domain.models.SubscribersModel
 import com.smurzik.rickstatistictesttask.domain.models.TopVisitorsModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -93,5 +94,37 @@ class StatisticRepositoryImpl(
             )
         }
         return result
+    }
+
+    override suspend fun getSubscribers(): SubscribersModel {
+        // assume current date is 09.09.2024
+        val currentDate = LocalDate.of(2024, 9, 9)
+        val formatter = DateTimeFormatter.ofPattern("ddMMyyyy")
+        val correctDatesStatistic = getStatistic().map {
+            it.dates.map { date ->
+                if (date.toString().length == 7) LocalDate.parse(
+                    "0$date",
+                    formatter
+                ) else LocalDate.parse(date.toString(), formatter)
+            } to it.type
+        }
+        var subscribesCount = 0
+        var unsubscribesCount = 0
+        correctDatesStatistic.forEach {
+            if (it.second == "subscription") {
+                it.first.forEach { date ->
+                    if (date.month == currentDate.month) subscribesCount++
+                }
+            }
+        }
+
+        correctDatesStatistic.forEach {
+            if (it.second == "unsubscription") {
+                it.first.forEach { date ->
+                    if (date.month == currentDate.month) unsubscribesCount++
+                }
+            }
+        }
+        return SubscribersModel(subscribesCount, unsubscribesCount)
     }
 }

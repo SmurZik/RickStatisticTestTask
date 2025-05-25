@@ -5,6 +5,7 @@ import com.smurzik.rickstatistictesttask.data.remote.StatisticService
 import com.smurzik.rickstatistictesttask.data.remote.StatisticServiceImpl
 import com.smurzik.rickstatistictesttask.domain.GetAgeStatisticUseCase
 import com.smurzik.rickstatistictesttask.domain.GetMonthlyVisitorsUseCase
+import com.smurzik.rickstatistictesttask.domain.GetSubscribersUseCase
 import com.smurzik.rickstatistictesttask.domain.GetTopVisitorsUseCase
 import com.smurzik.rickstatistictesttask.domain.GetVisitorsChartUseCase
 import com.smurzik.rickstatistictesttask.domain.StatisticRepository
@@ -65,5 +66,11 @@ object AppModule {
     @Singleton
     fun provideGetAgeStatisticUseCase(repository: StatisticRepository): GetAgeStatisticUseCase {
         return GetAgeStatisticUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetSubscribersUseCase(repository: StatisticRepository): GetSubscribersUseCase {
+        return GetSubscribersUseCase(repository)
     }
 }
