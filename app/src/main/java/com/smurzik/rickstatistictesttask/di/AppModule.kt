@@ -3,11 +3,11 @@ package com.smurzik.rickstatistictesttask.di
 import com.smurzik.rickstatistictesttask.data.StatisticRepositoryImpl
 import com.smurzik.rickstatistictesttask.data.remote.StatisticService
 import com.smurzik.rickstatistictesttask.data.remote.StatisticServiceImpl
-import com.smurzik.rickstatistictesttask.domain.GetAgeStatisticUseCase
-import com.smurzik.rickstatistictesttask.domain.GetMonthlyVisitorsUseCase
-import com.smurzik.rickstatistictesttask.domain.GetSubscribersUseCase
-import com.smurzik.rickstatistictesttask.domain.GetTopVisitorsUseCase
-import com.smurzik.rickstatistictesttask.domain.GetVisitorsChartUseCase
+import com.smurzik.rickstatistictesttask.domain.usecase.GetAgeStatisticUseCase
+import com.smurzik.rickstatistictesttask.domain.usecase.GetMonthlyVisitorsUseCase
+import com.smurzik.rickstatistictesttask.domain.usecase.GetSubscribersUseCase
+import com.smurzik.rickstatistictesttask.domain.usecase.GetTopVisitorsUseCase
+import com.smurzik.rickstatistictesttask.domain.usecase.GetVisitorsChartUseCase
 import com.smurzik.rickstatistictesttask.domain.StatisticRepository
 import dagger.Module
 import dagger.Provides

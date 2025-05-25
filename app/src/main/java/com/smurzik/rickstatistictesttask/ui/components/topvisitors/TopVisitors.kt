@@ -21,7 +21,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
@@ -32,9 +31,8 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.smurzik.rickstatistictesttask.R
 import com.smurzik.rickstatistictesttask.domain.models.TopVisitorsModel
-import com.smurzik.rickstatistictesttask.presentation.TopVisitorsViewModel
+import com.smurzik.rickstatistictesttask.presentation.topvisitors.TopVisitorsViewModel
 import com.smurzik.rickstatistictesttask.ui.theme.RickStatisticTestTaskTheme
-import com.valentinilk.shimmer.shimmer
 
 @Composable
 fun TopVisitorsComponent(

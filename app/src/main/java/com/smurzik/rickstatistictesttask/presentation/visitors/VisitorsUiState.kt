@@ -1,4 +1,4 @@
-package com.smurzik.rickstatistictesttask.presentation
+package com.smurzik.rickstatistictesttask.presentation.visitors
 
 import com.smurzik.rickstatistictesttask.domain.models.SortType
 import com.smurzik.rickstatistictesttask.domain.models.SortTypeVisitors

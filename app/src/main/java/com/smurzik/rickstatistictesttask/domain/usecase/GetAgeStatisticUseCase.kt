@@ -1,5 +1,6 @@
-package com.smurzik.rickstatistictesttask.domain
+package com.smurzik.rickstatistictesttask.domain.usecase
 
+import com.smurzik.rickstatistictesttask.domain.StatisticRepository
 import com.smurzik.rickstatistictesttask.domain.models.AgeStatisticModel
 import com.smurzik.rickstatistictesttask.domain.models.SortType
 import com.smurzik.rickstatistictesttask.domain.models.SortTypeAge

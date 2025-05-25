@@ -1,8 +1,8 @@
-package com.smurzik.rickstatistictesttask.presentation
+package com.smurzik.rickstatistictesttask.presentation.topvisitors
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smurzik.rickstatistictesttask.domain.GetTopVisitorsUseCase
+import com.smurzik.rickstatistictesttask.domain.usecase.GetTopVisitorsUseCase
 import com.smurzik.rickstatistictesttask.domain.models.TopVisitorsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

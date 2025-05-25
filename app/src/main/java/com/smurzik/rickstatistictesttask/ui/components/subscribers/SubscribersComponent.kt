@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.smurzik.rickstatistictesttask.R
-import com.smurzik.rickstatistictesttask.presentation.SubscribersViewModel
+import com.smurzik.rickstatistictesttask.presentation.subscribers.SubscribersViewModel
 import com.smurzik.rickstatistictesttask.ui.theme.RickStatisticTestTaskTheme
 
 @Composable

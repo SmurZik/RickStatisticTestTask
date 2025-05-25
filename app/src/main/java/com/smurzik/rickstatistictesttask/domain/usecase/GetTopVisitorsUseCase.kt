@@ -1,5 +1,6 @@
-package com.smurzik.rickstatistictesttask.domain
+package com.smurzik.rickstatistictesttask.domain.usecase
 
+import com.smurzik.rickstatistictesttask.domain.StatisticRepository
 import com.smurzik.rickstatistictesttask.domain.models.TopVisitorsModel
 
 class GetTopVisitorsUseCase(

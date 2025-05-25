@@ -1,8 +1,8 @@
-package com.smurzik.rickstatistictesttask.presentation
+package com.smurzik.rickstatistictesttask.presentation.subscribers
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smurzik.rickstatistictesttask.domain.GetSubscribersUseCase
+import com.smurzik.rickstatistictesttask.domain.usecase.GetSubscribersUseCase
 import com.smurzik.rickstatistictesttask.domain.models.SubscribersModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,6 @@
-package com.smurzik.rickstatistictesttask.domain
+package com.smurzik.rickstatistictesttask.domain.usecase
+
+import com.smurzik.rickstatistictesttask.domain.StatisticRepository
 
 class GetMonthlyVisitorsUseCase(
     private val repository: StatisticRepository

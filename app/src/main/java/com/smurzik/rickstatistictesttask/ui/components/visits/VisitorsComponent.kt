@@ -23,7 +23,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.smurzik.rickstatistictesttask.R
 import com.smurzik.rickstatistictesttask.domain.models.SortType
 import com.smurzik.rickstatistictesttask.domain.models.SortTypeVisitors
-import com.smurzik.rickstatistictesttask.presentation.VisitorsViewModel
+import com.smurzik.rickstatistictesttask.presentation.visitors.VisitorsViewModel
 import com.smurzik.rickstatistictesttask.ui.components.CustomRadioButtons
 import com.smurzik.rickstatistictesttask.ui.theme.RickStatisticTestTaskTheme
 

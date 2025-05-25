@@ -1,9 +1,9 @@
-package com.smurzik.rickstatistictesttask.presentation
+package com.smurzik.rickstatistictesttask.presentation.visitors
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smurzik.rickstatistictesttask.domain.GetMonthlyVisitorsUseCase
-import com.smurzik.rickstatistictesttask.domain.GetVisitorsChartUseCase
+import com.smurzik.rickstatistictesttask.domain.usecase.GetMonthlyVisitorsUseCase
+import com.smurzik.rickstatistictesttask.domain.usecase.GetVisitorsChartUseCase
 import com.smurzik.rickstatistictesttask.domain.models.SortType
 import com.smurzik.rickstatistictesttask.domain.models.SortTypeVisitors
 import com.smurzik.rickstatistictesttask.ui.components.visits.DataPoint

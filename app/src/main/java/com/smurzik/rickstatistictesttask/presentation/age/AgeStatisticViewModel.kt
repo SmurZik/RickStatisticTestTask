@@ -1,8 +1,8 @@
-package com.smurzik.rickstatistictesttask.presentation
+package com.smurzik.rickstatistictesttask.presentation.age
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smurzik.rickstatistictesttask.domain.GetAgeStatisticUseCase
+import com.smurzik.rickstatistictesttask.domain.usecase.GetAgeStatisticUseCase
 import com.smurzik.rickstatistictesttask.domain.models.SortType
 import com.smurzik.rickstatistictesttask.domain.models.SortTypeAge
 import dagger.hilt.android.lifecycle.HiltViewModel
