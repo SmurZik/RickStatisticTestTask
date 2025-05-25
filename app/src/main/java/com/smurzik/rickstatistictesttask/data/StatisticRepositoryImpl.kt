@@ -15,23 +15,33 @@ class StatisticRepositoryImpl(
 ) : StatisticRepository {
 
     override suspend fun getStatistic(): List<StatisticModel> {
-        return service.getStatistic().statistics.map { it.toStatisticModel() }
+        return try {
+            service.getStatistic().statistics.map { it.toStatisticModel() }
+        } catch (e: Exception) {
+            // handle different network exceptions
+            listOf()
+        }
     }
 
     override suspend fun getTopVisitors(): List<TopVisitorsModel> {
         val visitorViews = mutableMapOf<Int, Int>()
-        val users = service.getUsers().users
-        val statistic = getStatistic().filter { it.type == "view" }
-        statistic.forEach { statisticInfo ->
-            val count = visitorViews.getOrDefault(statisticInfo.userId, 0)
-            visitorViews[statisticInfo.userId] = count + statisticInfo.dates.size
-        }
-        val topUsers = visitorViews
-            .toList()
-            .sortedByDescending { it.second }
-            .map { it.first }
-        return topUsers.map { topUserId ->
-            users.find { it.id == topUserId }?.toTopVisitorsModel()!!
+        try {
+            val users = service.getUsers().users
+            val statistic = getStatistic().filter { it.type == "view" }
+            statistic.forEach { statisticInfo ->
+                val count = visitorViews.getOrDefault(statisticInfo.userId, 0)
+                visitorViews[statisticInfo.userId] = count + statisticInfo.dates.size
+            }
+            val topUsers = visitorViews
+                .toList()
+                .sortedByDescending { it.second }
+                .map { it.first }
+            return topUsers.map { topUserId ->
+                users.find { it.id == topUserId }?.toTopVisitorsModel()!!
+            }
+        } catch (e: Exception) {
+            //handle different network exceptions
+            return listOf()
         }
     }
 
@@ -70,61 +80,73 @@ class StatisticRepositoryImpl(
             if (it.format(formatter).startsWith('0')) it.format(formatter).drop(1)
             else it.format(formatter)
         }
-        val users = service.getUsers().users
-        val statistic = getStatistic().filter { it.type == "view" }
-        statistic.forEach { statisticInfo ->
-            if (sortTypeAge != SortTypeAge.ALL_TIME) {
-                var tempCount = 0
-                statisticInfo.dates.forEach {
-                    if (formattedDates.contains(it.toString())) tempCount++
+        try {
+            val users = service.getUsers().users
+            val statistic = getStatistic().filter { it.type == "view" }
+            statistic.forEach { statisticInfo ->
+                if (sortTypeAge != SortTypeAge.ALL_TIME) {
+                    var tempCount = 0
+                    statisticInfo.dates.forEach {
+                        if (formattedDates.contains(it.toString())) tempCount++
+                    }
+                    val count = visitorViews.getOrDefault(statisticInfo.userId, 0)
+                    visitorViews[statisticInfo.userId] = count + tempCount
+                } else {
+                    val count = visitorViews.getOrDefault(statisticInfo.userId, 0)
+                    visitorViews[statisticInfo.userId] = count + statisticInfo.dates.size
                 }
-                val count = visitorViews.getOrDefault(statisticInfo.userId, 0)
-                visitorViews[statisticInfo.userId] = count + tempCount
-            } else {
-                val count = visitorViews.getOrDefault(statisticInfo.userId, 0)
-                visitorViews[statisticInfo.userId] = count + statisticInfo.dates.size
             }
+            val result = visitorViews.map { viewStatistic ->
+                val user = users.find { it.id == viewStatistic.key }
+                AgeStatisticModel(
+                    age = user?.age ?: -1,
+                    isMale = user?.sex == "M",
+                    viewCount = viewStatistic.value
+                )
+            }
+            return result
+        } catch (e: Exception) {
+            //handle different network exceptions
+            return listOf()
         }
-        val result = visitorViews.map { viewStatistic ->
-            val user = users.find { it.id == viewStatistic.key }
-            AgeStatisticModel(
-                age = user?.age ?: -1,
-                isMale = user?.sex == "M",
-                viewCount = viewStatistic.value
-            )
-        }
-        return result
     }
 
     override suspend fun getSubscribers(): SubscribersModel {
         // assume current date is 09.09.2024
         val currentDate = LocalDate.of(2024, 9, 9)
         val formatter = DateTimeFormatter.ofPattern("ddMMyyyy")
-        val correctDatesStatistic = getStatistic().map {
-            it.dates.map { date ->
-                if (date.toString().length == 7) LocalDate.parse(
-                    "0$date",
-                    formatter
-                ) else LocalDate.parse(date.toString(), formatter)
-            } to it.type
-        }
-        var subscribesCount = 0
-        var unsubscribesCount = 0
-        correctDatesStatistic.forEach {
-            if (it.second == "subscription") {
-                it.first.forEach { date ->
-                    if (date.month == currentDate.month) subscribesCount++
-                }
-            }
-        }
+        try {
 
-        correctDatesStatistic.forEach {
-            if (it.second == "unsubscription") {
-                it.first.forEach { date ->
-                    if (date.month == currentDate.month) unsubscribesCount++
+
+            val correctDatesStatistic = getStatistic().map {
+                it.dates.map { date ->
+                    if (date.toString().length == 7) LocalDate.parse(
+                        "0$date",
+                        formatter
+                    ) else LocalDate.parse(date.toString(), formatter)
+                } to it.type
+            }
+            var subscribesCount = 0
+            var unsubscribesCount = 0
+            correctDatesStatistic.forEach {
+                if (it.second == "subscription") {
+                    it.first.forEach { date ->
+                        if (date.month == currentDate.month) subscribesCount++
+                    }
                 }
             }
+
+            correctDatesStatistic.forEach {
+                if (it.second == "unsubscription") {
+                    it.first.forEach { date ->
+                        if (date.month == currentDate.month) unsubscribesCount++
+                    }
+                }
+            }
+            return SubscribersModel(subscribesCount, unsubscribesCount)
+        } catch (e: Exception) {
+            //handle different network exceptions
+            return SubscribersModel(0, 0)
         }
-        return SubscribersModel(subscribesCount, unsubscribesCount)
     }
 }
