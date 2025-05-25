@@ -1,6 +1,7 @@
 package com.smurzik.rickstatistictesttask.domain
 
 import com.smurzik.rickstatistictesttask.domain.models.SortType
+import com.smurzik.rickstatistictesttask.domain.models.SortTypeVisitors
 import com.smurzik.rickstatistictesttask.domain.models.StatisticModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -16,10 +17,10 @@ class GetVisitorsChartUseCase(
 
         val views = repository.getStatistic().filter { it.type == "view" }
 
-        return when (sortType) {
-            SortType.DAYS -> visitorsByDays(views, date)
-            SortType.WEEKS -> visitorsByWeeks(views, date)
-            SortType.MONTHS -> visitorsByMonths(views, date)
+        return when (sortType as SortTypeVisitors) {
+            SortTypeVisitors.DAYS -> visitorsByDays(views, date)
+            SortTypeVisitors.WEEKS -> visitorsByWeeks(views, date)
+            SortTypeVisitors.MONTHS -> visitorsByMonths(views, date)
         }
     }
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.smurzik.rickstatistictesttask.domain.GetMonthlyVisitorsUseCase
 import com.smurzik.rickstatistictesttask.domain.GetVisitorsChartUseCase
 import com.smurzik.rickstatistictesttask.domain.models.SortType
+import com.smurzik.rickstatistictesttask.domain.models.SortTypeVisitors
 import com.smurzik.rickstatistictesttask.ui.components.visits.DataPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +40,7 @@ class VisitorsViewModel @Inject constructor(
         }
     }
 
-    fun getVisitorsChart(sortType: SortType = SortType.DAYS, isInit: Boolean = false) {
+    fun getVisitorsChart(sortType: SortType = SortTypeVisitors.DAYS, isInit: Boolean = false) {
         if (_uiState.value.selectedSortType != sortType || isInit) {
             if (job?.isActive == true) job?.cancel()
             _uiState.update {

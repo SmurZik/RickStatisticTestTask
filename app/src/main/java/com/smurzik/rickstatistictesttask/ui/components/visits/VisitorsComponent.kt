@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.smurzik.rickstatistictesttask.R
 import com.smurzik.rickstatistictesttask.domain.models.SortType
+import com.smurzik.rickstatistictesttask.domain.models.SortTypeVisitors
 import com.smurzik.rickstatistictesttask.presentation.VisitorsViewModel
 import com.smurzik.rickstatistictesttask.ui.components.CustomRadioButtons
 import com.smurzik.rickstatistictesttask.ui.theme.RickStatisticTestTaskTheme
@@ -101,7 +102,7 @@ fun Visitors(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 28.dp, bottom = 12.dp),
-            options = SortType.entries,
+            options = SortTypeVisitors.entries,
             selectedOption = selectedSortType,
             onOptionSelected = {
                 onSortTypeSelect(it)
@@ -134,7 +135,7 @@ fun VisitorsPreview() {
                 DataPoint(xLabel = "11.03", yValue = 9f),
                 DataPoint(xLabel = "12.03", yValue = 14f),
             ),
-            selectedSortType = SortType.WEEKS,
+            selectedSortType = SortTypeVisitors.WEEKS,
             onSortTypeSelect = { },
             isLoading = true
         )

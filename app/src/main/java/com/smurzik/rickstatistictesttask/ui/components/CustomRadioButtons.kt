@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.smurzik.rickstatistictesttask.domain.models.SortType
+import com.smurzik.rickstatistictesttask.domain.models.SortTypeVisitors
 import com.smurzik.rickstatistictesttask.ui.theme.RickStatisticTestTaskTheme
 
 @Composable
@@ -62,8 +63,8 @@ fun CustomRadioButtonsPreview() {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.background),
-            options = SortType.entries,
-            selectedOption = SortType.DAYS,
+            options = SortTypeVisitors.entries,
+            selectedOption = SortTypeVisitors.DAYS,
             onOptionSelected = {}
         )
     }

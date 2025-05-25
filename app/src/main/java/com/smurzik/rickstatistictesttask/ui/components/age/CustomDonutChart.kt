@@ -41,26 +41,28 @@ fun CustomDonutChart(
             val strokeWidth = 10.dp.toPx()
 
             // Female Arc
-            drawArc(
-                color = femaleColor,
-                startAngle = 275f,
-                sweepAngle = firstSweep - 10f,
-                useCenter = false,
-                topLeft = Offset(0f, 0f),
-                size = size,
-                style = Stroke(width = strokeWidth, cap = StrokeCap.Round)
-            )
+            if (female != 0f)
+                drawArc(
+                    color = femaleColor,
+                    startAngle = 275f,
+                    sweepAngle = if (male == 0f) firstSweep else firstSweep - 10f,
+                    useCenter = false,
+                    topLeft = Offset(0f, 0f),
+                    size = size,
+                    style = Stroke(width = strokeWidth, cap = StrokeCap.Round)
+                )
 
             // Male Arc
-            drawArc(
-                color = maleColor,
-                startAngle = firstSweep - 85f,
-                sweepAngle = secondSweep - 10f,
-                useCenter = false,
-                topLeft = Offset(0f, 0f),
-                size = size,
-                style = Stroke(width = strokeWidth, cap = StrokeCap.Round)
-            )
+            if (male != 0f)
+                drawArc(
+                    color = maleColor,
+                    startAngle = firstSweep - 85f,
+                    sweepAngle = if (female == 0f) secondSweep else secondSweep - 10f,
+                    useCenter = false,
+                    topLeft = Offset(0f, 0f),
+                    size = size,
+                    style = Stroke(width = strokeWidth, cap = StrokeCap.Round)
+                )
         }
     }
 }

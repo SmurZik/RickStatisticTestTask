@@ -1,5 +1,20 @@
 package com.smurzik.rickstatistictesttask.domain.models
 
-enum class SortType(val label: String) {
-    DAYS("По дням"), WEEKS("По неделям"), MONTHS("По месяцам")
+interface SortType {
+    val label: String
+}
+
+enum class SortTypeVisitors(private val type: String) : SortType {
+
+    DAYS("По дням"), WEEKS("По неделям"), MONTHS("По месяцам");
+
+    override val label: String
+        get() = this.type
+}
+
+enum class SortTypeAge(private val type: String) : SortType {
+    TODAY("Сегодня"), WEEK("Неделя"), MONTH("Месяц"), ALL_TIME("Все время");
+
+    override val label: String
+        get() = this.type
 }
